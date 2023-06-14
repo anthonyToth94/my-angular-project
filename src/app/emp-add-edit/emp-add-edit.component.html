@@ -1,0 +1,59 @@
+<div mat-dialog-title>
+    <h1>Munkavállaló Űrlap</h1>
+</div>
+<form [formGroup]="empForm" (ngSubmit)="onFormSubmit()">
+    <div mat-dialog-content class="content">
+        <div class="row">
+            <mat-form-field appearance="outline">
+                <mat-label>Vezeték név</mat-label>
+                <input matInput type="text" placeholder="Példa... Tóth" formControlName="firstName">
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Keresztnév</mat-label>
+                <input matInput type="text" placeholder="Példa... Antal" formControlName="lastName">
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Email</mat-label>
+                <input matInput type="email" placeholder="Példa... test@gmail.com" formControlName="email">
+            </mat-form-field>
+
+            <mat-form-field>
+                <mat-label>Születési dátum</mat-label>
+                <input matInput [matDatepicker]="picker" formControlName="dateOfBirth">
+                <mat-hint>MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+        
+            <mat-radio-group aria-label="Select an option" formControlName="gender">
+                <mat-label><b>Neme</b></mat-label>
+                <mat-radio-button value="ferfi">Ferfi</mat-radio-button>
+                <mat-radio-button value="no">No</mat-radio-button>
+                <mat-radio-button value="egyéb">Egyéb</mat-radio-button>
+            </mat-radio-group>  
+
+            <mat-form-field appearance="outline">
+            <mat-label>Végzettség</mat-label>
+            <mat-select formControlName="education">
+                <mat-option *ngFor="let val of education" [value]="val">{{val}}
+                </mat-option>
+            </mat-select>
+            </mat-form-field>
+            <mat-form-field appearance="outline">
+                <mat-label>Munkahely</mat-label>
+                <input matInput type="text" placeholder="Példa... Google" formControlName="company"> 
+            </mat-form-field>
+    
+            <mat-form-field appearance="outline">
+                <mat-label>Tapasztalat</mat-label>
+                <input matInput type="number" placeholder="Példa évben... 1 " formControlName="experience">
+            </mat-form-field>
+        </div>
+
+        <div mat-dialog-action>
+            <button mat-raised-button type="button" [mat-dialog-close]="false">Cancel</button>
+            <button mat-raised-button color="primary" type="submit">{{data ? 'update' : 'save'}}</button>
+        </div>
+    </div>  
+</form>
